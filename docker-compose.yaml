@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:17   # Используем последнюю версию PostgreSQL
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: 'parking'   # Имя пользователя для подключения к БД
+      POSTGRES_PASSWORD: 'parking'  # Пароль пользователя
+      POSTGRES_DB: 'parking' # Название базы данных
+    ports:
+      - "5432:5432"  # Пробрасываем порт PostgreSQL
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Монтируем директорию для хранения данных
+    restart: always  # Автоматический перезапуск контейнера при сбоях
+
+volumes:
+  postgres_data:  # Определяем volume для хранения данных
+    driver: local
